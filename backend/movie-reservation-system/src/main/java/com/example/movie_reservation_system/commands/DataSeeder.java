@@ -26,6 +26,14 @@ public class DataSeeder {
                 userRepo.save(admin);
             }
 
+            if (userRepo.findByEmail("user@example.com").isEmpty()) {
+                User user = new User();
+                user.setEmail("user@example.com");
+                user.setPassword("user123");
+                user.setRole(Role.USER);
+                userRepo.save(user);
+            }
+
             // Seed Movies
             if (movieRepo.count() == 0) {
                 movieRepo.save(new Movie("Inception", "A mind-bending thriller", "poster-image", Genre.fantasy, "02:28:23"));
