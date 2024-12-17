@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
@@ -28,17 +29,17 @@ public class JwtService {
     private String getToken(Map<String, Object> extraClaims, UserDetails user) {
         String role = user.getAuthorities().stream()
             .map(GrantedAuthority::getAuthority)
-            .findFirst() // Obtiene el primer rol (único rol)
+            .findFirst()
             .orElseThrow(() -> new RuntimeException("User has no roles assigned"));
         extraClaims.put("role", role);
 
         return Jwts
                 .builder()
-                .claims(extraClaims)
-                .subject(user.getUsername())
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
-                .signWith(getSignInKey(), Jwts.SIG.HS256)
+                .setClaims(extraClaims)
+                .setSubject(user.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -64,10 +65,10 @@ public class JwtService {
 
     private Claims getAllClaims(String token) {
         return Jwts.parserBuilder()
-        .verifyWith(getSignInKey())
-        .build()
-        .parseSignedClaims(token)
-        .getPayload();
+                .setSigningKey(getSignInKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     public <T> T getClaim(String token, Function<Claims, T> claimsResolver) {
