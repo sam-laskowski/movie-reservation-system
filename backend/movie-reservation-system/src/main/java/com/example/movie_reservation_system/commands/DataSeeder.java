@@ -17,11 +17,11 @@ public class DataSeeder {
     @Bean
     public CommandLineRunner seedData(UserRepository userRepo, MovieRepository movieRepo) {
         return args -> {
-            // Seed Admin User
             if (userRepo.findByEmail("admin@example.com").isEmpty()) {
                 User admin = new User();
                 admin.setEmail("admin@example.com");
                 admin.setPassword("password");
+                admin.setUsername("bobby123");
                 admin.setRole(Role.ADMIN);
                 userRepo.save(admin);
             }
@@ -30,11 +30,12 @@ public class DataSeeder {
                 User user = new User();
                 user.setEmail("user@example.com");
                 user.setPassword("user123");
+                user.setUsername("humbobobby12");
                 user.setRole(Role.USER);
                 userRepo.save(user);
             }
 
-            // Seed Movies
+            // Movies
             if (movieRepo.count() == 0) {
                 movieRepo.save(new Movie("Inception", "A mind-bending thriller", "poster-image", Genre.fantasy, "02:28:23"));
                 movieRepo.save(new Movie("Titanic", "A tragic love story", "poster-image", Genre.romance, "02:16:21"));
