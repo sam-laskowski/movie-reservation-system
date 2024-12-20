@@ -30,14 +30,6 @@ public class AuthController {
         
     }
 
-    // @PostMapping(value = "register")
-    // public ResponseEntity<String> register(@RequestBody User user)
-    // {
-    //     user.setPassword((user.getPassword()));
-    //     userService.saveUser(user);
-    //     return ResponseEntity.ok("User registered successfully");
-    // }
-
     @PostMapping(value = "register")
     public AuthResponse register(@RequestBody RegisterRequest request)
     {
