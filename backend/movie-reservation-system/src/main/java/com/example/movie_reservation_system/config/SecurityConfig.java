@@ -37,6 +37,7 @@ public class SecurityConfig {
                     .requestMatchers("/auth/register").permitAll()
                     .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                     .requestMatchers("/auth/**").permitAll()
+                    .requestMatchers("/movies/**").hasAuthority("ADMIN")
                     .requestMatchers("/admin/**").hasAuthority("ADMIN")
                     .requestMatchers("/user/**").hasAuthority("USER")
                     .anyRequest().authenticated())
