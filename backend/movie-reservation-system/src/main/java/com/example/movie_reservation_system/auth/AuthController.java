@@ -3,40 +3,33 @@ package com.example.movie_reservation_system.auth;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.RequiredArgsConstructor;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-
 @RestController
 @RequestMapping("/auth")
-@RequiredArgsConstructor
-@CrossOrigin(origins="*")
 public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping(value = "login")
-    public AuthResponse login(@RequestBody LoginRequest request)
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest request)
     {   
         String token = authService.login(request).getToken();
-        String username = authService.getUsername(token);
-        String role = authService.getRole(token);
-        AuthResponse authResponse = new AuthResponse(token,username,role);
-        return authResponse;
+        return ResponseEntity.ok(token);
         
     }
 
-    @PostMapping(value = "register")
-    public AuthResponse register(@RequestBody RegisterRequest request)
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody RegisterRequest request)
     {
         String token = authService.register(request).getToken();
-        String username = authService.getUsername(token);
-        String role = authService.getRole(token);
-        AuthResponse authResponse = new AuthResponse(token,username,role);
-        return authResponse;
+        return ResponseEntity.ok(token);
     }
 }
