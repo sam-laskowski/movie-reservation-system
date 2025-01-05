@@ -2,11 +2,16 @@ package com.example.movie_reservation_system.services;
 
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import com.example.movie_reservation_system.dto.ShowDTO;
 import com.example.movie_reservation_system.dto.ShowRequest;
 import com.example.movie_reservation_system.entities.CinemaRoom;
 import com.example.movie_reservation_system.entities.Movie;
@@ -21,8 +26,10 @@ public class ShowService {
     @Autowired
     private ShowRepository showRepository;
 
+    @Autowired
     private MovieRepository movieRepository;
 
+    @Autowired
     private CinemaRoomRepository cinemaRoomRepository;
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -47,5 +54,15 @@ public class ShowService {
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteShow(Long id) {
         showRepository.deleteById(id);
+    }
+    
+    public List<ShowDTO> findShowsByDate(LocalDate date) {
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = date.plusDays(1).atStartOfDay();
+        List<Show> shows = showRepository.findShowsByDate(startOfDay, endOfDay);
+
+        return shows.stream()
+                    .map(show -> new ShowDTO(show.getId(), show.getMovie().getTitle(), show.getStartTime(), show.getEndTime()))
+                    .collect(Collectors.toList());
     }
 }
