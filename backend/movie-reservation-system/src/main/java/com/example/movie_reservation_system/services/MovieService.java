@@ -1,5 +1,9 @@
 package com.example.movie_reservation_system.services;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -8,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.movie_reservation_system.dto.MovieDTO;
 import com.example.movie_reservation_system.entities.Movie;
+import com.example.movie_reservation_system.entities.Movie.Genre;
 import com.example.movie_reservation_system.repositories.MovieRepository;
 
 @Service
@@ -36,5 +41,10 @@ public class MovieService {
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteMovie(Long movieId) {
         movieRepository.deleteById(movieId);
+    }
+
+    public Map<Genre, List<Movie>> categorizeMoviesByGenre() {
+        List<Movie> movies = movieRepository.findAll();
+        return movies.stream().collect(Collectors.groupingBy(Movie::getGenre));
     }
 }
