@@ -36,12 +36,12 @@ public class Movie {
     private Genre genre;
 
     @Column(nullable=false)
-    private String duration;
+    private long duration;
     
     public enum Genre {
         comedy, horror, drama, thriller, action, fantasy, romance, scifi, musical, adventure
     }
-    public Movie(String title, String description, String posterImage, Genre genre, String duration) {
+    public Movie(String title, String description, String posterImage, Genre genre, long duration) {
         this.title = title;
         this.description = description;
         this.posterImage = posterImage;

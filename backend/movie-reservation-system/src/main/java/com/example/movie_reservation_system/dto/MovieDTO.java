@@ -12,5 +12,5 @@ public class MovieDTO {
     private String description;
     private String posterImage;
     private Genre genre;
-    private String duration;
+    private long duration;
 }

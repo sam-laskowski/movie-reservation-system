@@ -50,13 +50,13 @@ public class DataSeeder {
 
             // Movies
             if (movieRepo.count() == 0) {
-                movieRepo.save(new Movie("Inception", "A mind-bending thriller", "poster-image", Genre.fantasy, "02:28:23"));
-                movieRepo.save(new Movie("Titanic", "A tragic love story", "poster-image", Genre.romance, "02:16:21"));
+                movieRepo.save(new Movie("Inception", "A mind-bending thriller", "poster-image", Genre.fantasy, 137));
+                movieRepo.save(new Movie("Titanic", "A tragic love story", "poster-image", Genre.romance, 212));
             }
             if (cinemaRepository.count() == 0) {
 
-                Movie movie1 = new Movie("movie 1", "Description 1", "poster1.jpg", Genre.drama, "02:00:00");
-                Movie movie2 = new Movie("movie 2", "Description 2", "poster2.jpg", Genre.scifi, "01:30:00");
+                Movie movie1 = new Movie("movie 1", "Description 1", "poster1.jpg", Genre.drama, 412);
+                Movie movie2 = new Movie("movie 2", "Description 2", "poster2.jpg", Genre.scifi, 198);
                 
                 // must save entities before referencing them
                 movie1 = movieRepo.save(movie1);
