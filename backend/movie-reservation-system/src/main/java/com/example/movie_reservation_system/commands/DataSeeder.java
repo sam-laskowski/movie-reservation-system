@@ -70,8 +70,8 @@ public class DataSeeder {
                 cinemaRoomRepository.save(cinemaRoom);
     
                 // Create shows
-                Show show1 = new Show(null, movie1, cinemaRoom, LocalDateTime.of(2024, 1, 1, 12, 0, 0), LocalDateTime.of(2024, 1, 1, 14, 0, 0) );
-                Show show2 = new Show(null, movie2, cinemaRoom, LocalDateTime.of(2024, 1, 1, 14, 0, 0), LocalDateTime.of(2024, 1, 1, 15, 30, 0) );
+                Show show1 = new Show(null, movie1, cinemaRoom, LocalDateTime.of(2024, 1, 1, 12, 0, 0), LocalDateTime.of(2024, 1, 1, 14, 0, 0), new ArrayList<>());
+                Show show2 = new Show(null, movie2, cinemaRoom, LocalDateTime.of(2024, 1, 1, 14, 0, 0), LocalDateTime.of(2024, 1, 1, 15, 30, 0), new ArrayList<>());
     
                 showRepository.save(show1);
                 showRepository.save(show2);

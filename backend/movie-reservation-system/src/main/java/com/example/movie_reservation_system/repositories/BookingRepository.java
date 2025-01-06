@@ -13,4 +13,6 @@ import com.example.movie_reservation_system.entities.Show;
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     List<Seat> findBookedSeatsByShow(Show show);
+
+    List<Booking> findBookingsByUserId(Long userId);
 }
