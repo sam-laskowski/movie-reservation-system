@@ -16,7 +16,8 @@ import jakarta.persistence.LockModeType;
 @Repository
 public interface SeatRepository extends JpaRepository<Seat, Long> {
 
-    List<Seat> findByCinemaRoomId(Long cinemaRoomId);
+    @Query("SELECT s FROM Seat s WHERE s.cinemaRoom.id = :cinemaRoomId")
+    List<Seat> findByCinemaRoomId(@Param("cinemaRoomId") Long cinemaRoomId);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT s FROM Seat s WHERE s.id = :seatId")
