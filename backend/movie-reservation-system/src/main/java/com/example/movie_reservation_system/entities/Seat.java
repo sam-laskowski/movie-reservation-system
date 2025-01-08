@@ -1,5 +1,7 @@
 package com.example.movie_reservation_system.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -33,6 +35,7 @@ public class Seat {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cinema_room_id")
+    @JsonBackReference
     private CinemaRoom cinemaRoom;
 
     public enum SeatType {

@@ -34,7 +34,7 @@ public class Show {
     private Movie movie;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="cinemaRoom_id")
+    @JoinColumn(name="cinema_room_id")
     private CinemaRoom cinemaRoom;
 
     @Column(nullable=false)

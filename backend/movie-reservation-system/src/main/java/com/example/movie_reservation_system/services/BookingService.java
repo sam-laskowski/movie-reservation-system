@@ -53,5 +53,6 @@ public class BookingService {
         booking.setUser(user);
         booking.setShow(show);
         bookingRepository.save(booking);
+        // TODO: update seat in seat repository
     }
 }

@@ -3,6 +3,9 @@ package com.example.movie_reservation_system.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,12 +33,14 @@ public class CinemaRoom {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cinema_id")
+    @JsonBackReference
     private Cinema cinema;
 
     @OneToMany(mappedBy = "cinemaRoom", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Show> shows = new ArrayList<>();
 
     @OneToMany(mappedBy = "cinemaRoom", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Seat> seats = new ArrayList<>();
 
     private int totalCapacity;

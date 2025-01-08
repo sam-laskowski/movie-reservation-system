@@ -75,6 +75,7 @@ public class DataSeeder {
     
                 showRepository.save(show1);
                 showRepository.save(show2);
+
     
                 // Create seats
                 for (int j = 1; j <= 40; j++) {
