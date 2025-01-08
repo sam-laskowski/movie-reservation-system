@@ -11,6 +11,7 @@ import com.example.movie_reservation_system.entities.Booking;
 import com.example.movie_reservation_system.entities.Seat;
 import com.example.movie_reservation_system.entities.Show;
 import com.example.movie_reservation_system.entities.User;
+import com.example.movie_reservation_system.entities.Seat.SeatStatus;
 import com.example.movie_reservation_system.repositories.BookingRepository;
 import com.example.movie_reservation_system.repositories.SeatRepository;
 import com.example.movie_reservation_system.repositories.ShowRepository;
@@ -46,6 +47,11 @@ public class BookingService {
         User user = userRepository.findById(bookingRequest.getUserId()).orElseThrow(() -> new EntityNotFoundException("User not found"));
         Show show = showRepository.findById(bookingRequest.getShowId()).orElseThrow(() -> new EntityNotFoundException("Show not found"));
         Seat seat = seatRepository.findById(bookingRequest.getSeatId()).orElseThrow(() -> new EntityNotFoundException("Seat not found"));
+
+        if (seat.getStatus() == SeatStatus.booked) {
+            throw new IllegalStateException("Seat already booked");
+        }
+
         LocalDateTime bookingTime = LocalDateTime.now();
         Booking booking = new Booking();
         booking.setBookingTime(bookingTime);
@@ -53,6 +59,9 @@ public class BookingService {
         booking.setUser(user);
         booking.setShow(show);
         bookingRepository.save(booking);
-        // TODO: update seat in seat repository
+
+        seat.setStatus(SeatStatus.booked);
+        seatRepository.save(seat);
+
     }
 }
