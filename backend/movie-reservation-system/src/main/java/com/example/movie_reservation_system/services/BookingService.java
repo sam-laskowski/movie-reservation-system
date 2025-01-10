@@ -104,6 +104,19 @@ public class BookingService {
 
     public List<UserBookingsDTO> getBookingsByUserId(Long userId) {
         return bookingRepository.findUserBookingsDTOByUserId(userId);
-    }    
+    }
+
+    public void cancelBooking(String username, Long bookingId) {
+        Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> new EntityNotFoundException("Booking not found"));
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        if (!booking.getUser().getId().equals(user.getId())) {
+            throw new IllegalArgumentException("Booking does not belong to user");
+        }
+        bookingRepository.delete(booking);
+        Seat seat = seatRepository.findById(booking.getSeat().getId()).orElseThrow(() -> new EntityNotFoundException("Seat not found"));
+        seat.setStatus(SeatStatus.available);
+        seatRepository.save(seat);
+    }
     
 }
