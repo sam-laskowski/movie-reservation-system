@@ -118,5 +118,4 @@ public class BookingService {
         seat.setStatus(SeatStatus.available);
         seatRepository.save(seat);
     }
-    
 }
