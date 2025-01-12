@@ -1,20 +1,10 @@
 "use client";
 
 import { register } from "@/app/actions/actions";
-import React, { useActionState, useState } from "react";
+import React, { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 
 export default function SignupForm() {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   const [state, registerAction] = useActionState(register, undefined);
 
   return (
@@ -31,8 +21,6 @@ export default function SignupForm() {
             id="username"
             name="username"
             placeholder="username"
-            value={formData.username}
-            onChange={handleChange}
           />
         </div>
         <div>
@@ -47,8 +35,6 @@ export default function SignupForm() {
             name="email"
             type="email"
             placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
           />
         </div>
         <div>
@@ -62,8 +48,6 @@ export default function SignupForm() {
             id="password"
             name="password"
             type="password"
-            value={formData.password}
-            onChange={handleChange}
           />
         </div>
         <SubmitButton />
