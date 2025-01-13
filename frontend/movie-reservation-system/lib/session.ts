@@ -11,6 +11,6 @@ export async function decrypt(session: string | undefined = "") {
     });
     return payload;
   } catch (e: any) {
-    console.error(e);
+    //console.log(e);
   }
 }

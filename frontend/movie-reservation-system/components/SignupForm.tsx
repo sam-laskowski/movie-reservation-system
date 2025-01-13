@@ -1,6 +1,6 @@
 "use client";
 
-import { register } from "@/app/actions/actions";
+import { register } from "@/actions/actions";
 import React, { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 

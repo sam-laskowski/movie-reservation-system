@@ -1,4 +1,4 @@
-import { decrypt } from "@/app/lib/session";
+import { decrypt } from "@/lib/session";
 import type { UserBookings } from "@/types/userTypes";
 import { cookies } from "next/headers";
 import React from "react";
@@ -7,6 +7,7 @@ export default async function UserBookings() {
   const cookie = (await cookies()).get("session")?.value;
   const session = await decrypt(cookie);
   console.log(session);
+  if (!session) return;
 
   const data = await fetch(
     `http://localhost:8080/bookings/get-user-bookings?userId=${session!.userId}`

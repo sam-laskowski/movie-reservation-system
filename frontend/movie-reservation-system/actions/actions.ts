@@ -1,4 +1,5 @@
 "use server";
+import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 export async function register(prevState: any, formData: FormData) {
@@ -30,4 +31,5 @@ export async function register(prevState: any, formData: FormData) {
   } catch (error: any) {
     console.error(error);
   }
+  redirect("/dashboard");
 }
