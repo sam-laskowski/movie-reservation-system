@@ -35,10 +35,10 @@ public class BookingService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<Seat> getAvailableSeats(Long showId) {
+    public List<Seat> getAllSeats(Long showId) {
         Show show = showRepository.findById(showId).orElseThrow(() -> new EntityNotFoundException("Show not found"));
 
-        List<Seat> allSeats = seatRepository.findByCinemaRoomId(show.getCinemaRoom().getId());
+        List<Seat> allSeats = seatRepository.findByShow(show);
         // List<Seat> bookedSeats = bookingRepository.findBookedSeatsByShow(show);
 
         return allSeats;

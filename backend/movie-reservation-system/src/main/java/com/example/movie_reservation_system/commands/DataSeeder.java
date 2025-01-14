@@ -11,12 +11,9 @@ import com.example.movie_reservation_system.entities.Cinema;
 import com.example.movie_reservation_system.entities.CinemaRoom;
 import com.example.movie_reservation_system.entities.Movie;
 import com.example.movie_reservation_system.entities.Role;
-import com.example.movie_reservation_system.entities.Seat;
 import com.example.movie_reservation_system.entities.Show;
 import com.example.movie_reservation_system.entities.User;
 import com.example.movie_reservation_system.entities.Movie.Genre;
-import com.example.movie_reservation_system.entities.Seat.SeatStatus;
-import com.example.movie_reservation_system.entities.Seat.SeatType;
 import com.example.movie_reservation_system.repositories.CinemaRepository;
 import com.example.movie_reservation_system.repositories.CinemaRoomRepository;
 import com.example.movie_reservation_system.repositories.MovieRepository;
@@ -66,26 +63,15 @@ public class DataSeeder {
                 Cinema cinema = new Cinema(null, "IMAX", "123 Main St", new ArrayList<>());
                 cinemaRepository.save(cinema);
     
-                CinemaRoom cinemaRoom = new CinemaRoom(null, cinema, new ArrayList<>(), new ArrayList<>(), 50);
+                CinemaRoom cinemaRoom = new CinemaRoom(null, cinema, new ArrayList<>(), 10, 50);
                 cinemaRoomRepository.save(cinemaRoom);
     
                 // Create shows
-                Show show1 = new Show(null, movie1, cinemaRoom, LocalDateTime.of(2024, 1, 1, 12, 0, 0), LocalDateTime.of(2024, 1, 1, 14, 0, 0), new ArrayList<>());
-                Show show2 = new Show(null, movie2, cinemaRoom, LocalDateTime.of(2024, 1, 1, 14, 0, 0), LocalDateTime.of(2024, 1, 1, 15, 30, 0), new ArrayList<>());
+                Show show1 = new Show(null, movie1, cinemaRoom, LocalDateTime.of(2024, 1, 1, 12, 0, 0), LocalDateTime.of(2024, 1, 1, 14, 0, 0), new ArrayList<>(), new ArrayList<>());
+                Show show2 = new Show(null, movie2, cinemaRoom, LocalDateTime.of(2024, 1, 1, 14, 0, 0), LocalDateTime.of(2024, 1, 1, 15, 30, 0), new ArrayList<>(), new ArrayList<>());
     
                 showRepository.save(show1);
                 showRepository.save(show2);
-
-    
-                // Create seats
-                for (int j = 1; j <= 40; j++) {
-                    Seat seat = new Seat(null, SeatType.standard, SeatStatus.available, 9.99, cinemaRoom);
-                    seatRepository.save(seat);
-                }
-                for (int j = 1; j <= 10; j++) {
-                    Seat seat = new Seat(null, SeatType.premium, SeatStatus.available, 12.99, cinemaRoom);
-                    seatRepository.save(seat);
-                }
             }
     };
 }

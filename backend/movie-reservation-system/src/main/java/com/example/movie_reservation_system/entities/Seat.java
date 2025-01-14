@@ -34,9 +34,9 @@ public class Seat {
     private double price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cinema_room_id")
+    @JoinColumn(name = "show_id")
     @JsonBackReference
-    private CinemaRoom cinemaRoom;
+    private Show show;
 
     public enum SeatType {
         standard,

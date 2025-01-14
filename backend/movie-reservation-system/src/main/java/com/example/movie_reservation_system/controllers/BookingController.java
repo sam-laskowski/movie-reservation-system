@@ -32,8 +32,8 @@ public class BookingController {
     }
 
     @GetMapping("/find-seats")
-    public ResponseEntity<List<Seat>> findAvailableSeats(Long showId) {
-        List<Seat> availableSeats = bookingService.getAvailableSeats(showId);
+    public ResponseEntity<List<Seat>> findAllSeats(Long showId) {
+        List<Seat> availableSeats = bookingService.getAllSeats(showId);
         return ResponseEntity.ok(availableSeats);
     }
 

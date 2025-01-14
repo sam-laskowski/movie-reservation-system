@@ -1,6 +1,7 @@
 package com.example.movie_reservation_system.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -13,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PostPersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,5 +47,30 @@ public class Show {
 
     @OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
     private List<Booking> bookings;
+
+    @OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
+    private List<Seat> seats = new ArrayList<>();
+
+
+    @PostPersist
+    public void initializeSeats() {
+        if (cinemaRoom != null) {
+            for (int i=0; i < cinemaRoom.getNumPremiumSeats(); i++) {
+                Seat premiumSeat = new Seat();
+                premiumSeat.setType(Seat.SeatType.premium);
+                premiumSeat.setStatus(Seat.SeatStatus.available);
+                premiumSeat.setShow(this);
+                seats.add(premiumSeat);
+            }
+
+            for (int i = 0; i < cinemaRoom.getNumStandardSeats(); i++) {
+                Seat standardSeat = new Seat();
+                standardSeat.setType(Seat.SeatType.standard);
+                standardSeat.setStatus(Seat.SeatStatus.available);
+                standardSeat.setShow(this);
+                seats.add(standardSeat);
+            }
+        }
+    }
 
 }

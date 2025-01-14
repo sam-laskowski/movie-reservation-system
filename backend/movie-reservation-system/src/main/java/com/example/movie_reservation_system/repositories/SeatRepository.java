@@ -10,14 +10,17 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.movie_reservation_system.entities.Seat;
+import com.example.movie_reservation_system.entities.Show;
 
 import jakarta.persistence.LockModeType;
 
 @Repository
 public interface SeatRepository extends JpaRepository<Seat, Long> {
 
-    @Query("SELECT s FROM Seat s WHERE s.cinemaRoom.id = :cinemaRoomId")
-    List<Seat> findByCinemaRoomId(@Param("cinemaRoomId") Long cinemaRoomId);
+    //@Query("SELECT s FROM Seat s WHERE s.cinemaRoom.id = :cinemaRoomId")
+    //List<Seat> findByCinemaRoomId(@Param("cinemaRoomId") Long cinemaRoomId);
+
+    List<Seat> findByShow(Show show);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT s FROM Seat s WHERE s.id = :seatId")
