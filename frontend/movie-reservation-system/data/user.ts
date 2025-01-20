@@ -6,6 +6,6 @@ export const getUser = cache(async () => {
   const session = await verifySession();
 
   // 2. Fetch user data
-  const userId = session.userId;
+  const userId = session?.userId;
   return userId;
 });
