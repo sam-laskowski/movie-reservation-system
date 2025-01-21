@@ -19,3 +19,7 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.movie-poster-image {
+  box-shadow: 0 0 100px -10px hsla(0, 0%, 100%, 0.4);
+}
