@@ -13,6 +13,7 @@ import com.example.movie_reservation_system.entities.Movie;
 import com.example.movie_reservation_system.entities.Role;
 import com.example.movie_reservation_system.entities.Show;
 import com.example.movie_reservation_system.entities.User;
+import com.example.movie_reservation_system.entities.Movie.AgeRating;
 import com.example.movie_reservation_system.entities.Movie.Genre;
 import com.example.movie_reservation_system.repositories.CinemaRepository;
 import com.example.movie_reservation_system.repositories.CinemaRoomRepository;
@@ -47,13 +48,13 @@ public class DataSeeder {
 
             // Movies
             if (movieRepo.count() == 0) {
-                movieRepo.save(new Movie("Inception", "A mind-bending thriller", "poster-image", Genre.fantasy, 137));
-                movieRepo.save(new Movie("Titanic", "A tragic love story", "poster-image", Genre.romance, 212));
+                movieRepo.save(new Movie("Inception", "Cobb, a skilled thief who commits corporate espionage by infiltrating the subconscious of his targets is offered a chance to regain his old life as payment for a task considered to be impossible: “inception”, the implantation of another person’s idea into a target’s subconscious.", "https://theposterdb.com/api/assets/52633/view", Genre.fantasy, 148, AgeRating.R12));
+                movieRepo.save(new Movie("Titanic", "101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic, 84 years later. A young Rose boards the ship with her mother and fiancé. Meanwhile, Jack Dawson and Fabrizio De Rossi win third-class tickets aboard the ship. Rose tells the whole story from Titanic’s departure through to its death—on its first and last voyage—on April 15, 1912.", "https://theposterdb.com/api/assets/101730/view", Genre.romance, 194, AgeRating.PG));
             }
             if (cinemaRepository.count() == 0) {
 
-                Movie movie1 = new Movie("movie 1", "Description 1", "poster1.jpg", Genre.drama, 412);
-                Movie movie2 = new Movie("movie 2", "Description 2", "poster2.jpg", Genre.scifi, 198);
+                Movie movie1 = new Movie("Dune", "Follow the mythic journey of Paul Atreides as he unites with Chani and the Fremen while on a path of revenge against the conspirators who destroyed his family. Facing a choice between the love of his life and the fate of the known universe, Paul endeavors to prevent a terrible future only he can foresee.", "https://theposterdb.com/api/assets/356989/view", Genre.adventure, 167, AgeRating.R15);
+                Movie movie2 = new Movie("Oppenheimer", "The story of J. Robert Oppenheimer’s role in the development of the atomic bomb during World War II.", "https://theposterdb.com/api/assets/252160/view", Genre.drama, 181, AgeRating.R18);
                 
                 // must save entities before referencing them
                 movie1 = movieRepo.save(movie1);

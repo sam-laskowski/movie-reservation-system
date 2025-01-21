@@ -47,4 +47,9 @@ public class MovieService {
         List<Movie> movies = movieRepository.findAll();
         return movies.stream().collect(Collectors.groupingBy(Movie::getGenre));
     }
+
+    public List<Movie> getAllMovies() {
+        List<Movie> allMovies = movieRepository.findAll();
+        return allMovies;
+    }
 }

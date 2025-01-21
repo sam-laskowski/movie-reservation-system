@@ -53,4 +53,11 @@ public class MovieController {
         Map<Genre, List<Movie>> categorizedMovies = movieService.categorizeMoviesByGenre();
         return ResponseEntity.ok(categorizedMovies);
     }
+
+    @GetMapping("/all-movies")
+    public ResponseEntity<List<Movie>> getAllMovies() {
+        List<Movie> allMovies = movieService.getAllMovies();
+        return ResponseEntity.ok(allMovies);
+    }
+
 }

@@ -38,15 +38,24 @@ public class Movie {
     @Column(nullable=false)
     private long duration;
     
+    @Enumerated(EnumType.STRING)
+    private AgeRating ageRating;
+    
     public enum Genre {
         comedy, horror, drama, thriller, action, fantasy, romance, scifi, musical, adventure
     }
-    public Movie(String title, String description, String posterImage, Genre genre, long duration) {
+
+    public enum AgeRating {
+        U, PG, R12, R15, R18
+    }
+
+    public Movie(String title, String description, String posterImage, Genre genre, long duration, AgeRating ageRating) {
         this.title = title;
         this.description = description;
         this.posterImage = posterImage;
         this.genre = genre;
         this.duration = duration;
+        this.ageRating = ageRating;
     }
 
 }
