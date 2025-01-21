@@ -14,8 +14,8 @@ export default function MovieCard({
 }: MovieCardProps) {
   return (
     <>
-      <div className="flex flex-col items-center">
-        <div className="flex flex-row items-start">
+      <div className="flex flex-col items-center w-full">
+        <div className="flex flex-row items-start w-full">
           <Image
             src={posterURL}
             alt="MOVIE POSTER"
@@ -26,7 +26,7 @@ export default function MovieCard({
           <div className="flex flex-col ml-2">
             <Link
               href={`/movies/${id}`}
-              className="text-lg uppercase font-bold"
+              className="text-2xl uppercase font-bold"
             >
               {title}
             </Link>
