@@ -60,4 +60,10 @@ public class MovieController {
         return ResponseEntity.ok(allMovies);
     }
 
+    @GetMapping("/get-movie")
+    public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
+        Movie movie = movieService.getMovie(id);
+        return ResponseEntity.ok(movie);
+    }
+
 }

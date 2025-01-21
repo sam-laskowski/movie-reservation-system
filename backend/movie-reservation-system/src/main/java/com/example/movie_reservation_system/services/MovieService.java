@@ -52,4 +52,9 @@ public class MovieService {
         List<Movie> allMovies = movieRepository.findAll();
         return allMovies;
     }
+
+    public Movie getMovie(Long movieId) {
+        Movie movie = movieRepository.findById(movieId).orElseThrow();
+        return movie;
+    }
 }
