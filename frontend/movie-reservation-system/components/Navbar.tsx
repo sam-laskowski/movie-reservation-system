@@ -11,7 +11,9 @@ export default async function Navbar() {
     return (
       <div>
         <div className="flex flex-row justify-center items-center gap-3">
-          <h1 className="text-4xl p-3">Cinema Deluxe</h1>
+          <Link href={"/"}>
+            <h1 className="text-4xl p-3">Cinema Deluxe</h1>
+          </Link>
 
           <Link href="/movies">Explore Movies</Link>
           <Link href="/register">Register</Link>
@@ -25,8 +27,9 @@ export default async function Navbar() {
   return (
     <div>
       <div className="flex flex-row justify-center items-center gap-3">
-        <h1 className="text-4xl p-3">Cinema Deluxe</h1>
-
+        <Link href={"/"}>
+          <h1 className="text-4xl p-3">Cinema Deluxe</h1>
+        </Link>
         <Link href="/movies">Explore Movies</Link>
         <button onClick={logout}>Logout</button>
       </div>

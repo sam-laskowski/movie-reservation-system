@@ -1,12 +1,24 @@
 "use server";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { deleteSession } from "@/lib/session";
+import { FormState, RegisterFormSchema } from "@/lib/definitions";
 
-//TODO: use zod for form validation
-
-export async function register(prevState: any, formData: FormData) {
+export async function register(state: FormState, formData: FormData) {
   console.log(formData);
+
+  const validateFields = RegisterFormSchema.safeParse({
+    username: formData.get("username"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
+
+  // if any form fields invalid return early
+  if (!validateFields.success) {
+    return {
+      errors: validateFields.error.flatten().fieldErrors,
+    };
+  }
+
   let loginSuccessful = false;
   try {
     const response = await fetch("http://localhost:8080/auth/register", {
