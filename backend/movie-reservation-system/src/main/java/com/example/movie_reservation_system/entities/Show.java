@@ -59,6 +59,7 @@ public class Show {
                 Seat premiumSeat = new Seat();
                 premiumSeat.setType(Seat.SeatType.premium);
                 premiumSeat.setStatus(Seat.SeatStatus.available);
+                premiumSeat.setPrice(10.99);
                 premiumSeat.setShow(this);
                 seats.add(premiumSeat);
             }
@@ -67,6 +68,7 @@ public class Show {
                 Seat standardSeat = new Seat();
                 standardSeat.setType(Seat.SeatType.standard);
                 standardSeat.setStatus(Seat.SeatStatus.available);
+                standardSeat.setPrice(7.99);
                 standardSeat.setShow(this);
                 seats.add(standardSeat);
             }

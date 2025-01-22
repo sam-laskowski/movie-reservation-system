@@ -63,6 +63,9 @@ public class DataSeeder {
                 // Cinema, cinema rooms and seats
                 Cinema cinema = new Cinema(null, "IMAX", "123 Main St", new ArrayList<>());
                 cinemaRepository.save(cinema);
+
+                Cinema cinema2 = new Cinema(null, "ODEON", "224 Baker St", new ArrayList<>());
+                cinemaRepository.save(cinema2);
     
                 CinemaRoom cinemaRoom = new CinemaRoom(null, cinema, new ArrayList<>(), 10, 50);
                 cinemaRoomRepository.save(cinemaRoom);

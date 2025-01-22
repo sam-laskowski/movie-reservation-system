@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import com.example.movie_reservation_system.dto.ShowCinemaDTO;
 import com.example.movie_reservation_system.dto.ShowDTO;
 import com.example.movie_reservation_system.dto.ShowRequest;
 import com.example.movie_reservation_system.entities.CinemaRoom;
@@ -64,5 +65,10 @@ public class ShowService {
         return shows.stream()
                     .map(show -> new ShowDTO(show.getId(), show.getMovie().getTitle(), show.getStartTime(), show.getEndTime()))
                     .collect(Collectors.toList());
+    }
+
+    public List<ShowCinemaDTO> findShowsByCinemaId(Long cinemaId) {
+        List<ShowCinemaDTO> shows = showRepository.findAllByCinemaId(cinemaId);
+        return shows;
     }
 }
