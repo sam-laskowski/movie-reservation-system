@@ -7,5 +7,4 @@ import com.example.movie_reservation_system.entities.Cinema;
 
 @Repository
 public interface CinemaRepository extends JpaRepository<Cinema, Long> {
-
 }
