@@ -1,3 +1,5 @@
+import CinemaFetch from "@/components/movie-components/CinemaFetch";
+import CinemaSelect from "@/components/movie-components/CinemaSelect";
 import MovieDisplay from "@/components/movie-components/MovieDisplay";
 import React from "react";
 
@@ -7,6 +9,7 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
   return (
     <div className="flex items-center flex-col">
       <MovieDisplay movieId={id} />
+      <CinemaFetch />
     </div>
   );
 }
