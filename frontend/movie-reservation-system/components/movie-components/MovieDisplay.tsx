@@ -21,13 +21,13 @@ export default async function MovieDisplay({ movieId }: { movieId: number }) {
   } = movie;
   return (
     <>
-      <div className="absolute overflow-hidden">
+      <div className="absolute overflow-hidden -z-10">
         <Image
           src={backdropImage}
           alt="Backdrop poster"
           width={3840}
           height={2160}
-          className="opacity-15 object-cover min-h-96"
+          className="opacity-15 object-cover min-h-96 -z-10"
         />
         <div className="absolute top-0 left-0 right-0 h-10 bg-gradient-to-b from-[var(--background)] to-transparent"></div>
         <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-[var(--background)] to-transparent"></div>

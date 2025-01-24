@@ -1,5 +1,5 @@
 import MovieCard from "@/components/movie-components/MovieCard";
-import { convertToHoursAndMinutes } from "@/lib/utils";
+import { convertToHoursAndMinutes } from "@/lib/myUtils";
 import { Movie, MovieList } from "@/types/movieTypes";
 import React from "react";
 
