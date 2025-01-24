@@ -61,10 +61,10 @@ public class DataSeeder {
                 movie2 = movieRepo.save(movie2);
     
                 // Cinema, cinema rooms and seats
-                Cinema cinema = new Cinema(null, "IMAX", "123 Main St", new ArrayList<>());
+                Cinema cinema = new Cinema(null, "IMAX", "London", new ArrayList<>());
                 cinemaRepository.save(cinema);
 
-                Cinema cinema2 = new Cinema(null, "ODEON", "224 Baker St", new ArrayList<>());
+                Cinema cinema2 = new Cinema(null, "ODEON", "Manchester", new ArrayList<>());
                 cinemaRepository.save(cinema2);
     
                 CinemaRoom cinemaRoom = new CinemaRoom(null, cinema, new ArrayList<>(), 10, 50);

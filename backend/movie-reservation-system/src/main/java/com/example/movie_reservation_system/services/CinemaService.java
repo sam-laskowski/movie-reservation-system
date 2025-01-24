@@ -1,11 +1,13 @@
 package com.example.movie_reservation_system.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import com.example.movie_reservation_system.dto.CinemaDTO;
 import com.example.movie_reservation_system.entities.Cinema;
 import com.example.movie_reservation_system.repositories.CinemaRepository;
 
@@ -30,8 +32,19 @@ public class CinemaService {
         return cinema;
     }
 
-    public List<Cinema> getAllCinemas(){
+    public List<CinemaDTO> getAllCinemas(){
         List<Cinema> allCinemas = cinemaRepository.findAll();
-        return allCinemas;
+
+        return allCinemas.stream()
+                        .map(this::mapToDTO)
+                        .collect(Collectors.toList());
+    }
+
+    private CinemaDTO mapToDTO(Cinema cinema) {
+        CinemaDTO cinemaDTO = new CinemaDTO();
+        cinemaDTO.setId(cinema.getId());
+        cinemaDTO.setLocationName(cinema.getLocationName());
+        cinemaDTO.setAddress(cinema.getAddress());
+        return cinemaDTO;
     }
 }
