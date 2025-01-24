@@ -1,4 +1,5 @@
 import MovieCard from "@/components/movie-components/MovieCard";
+import { convertToHoursAndMinutes } from "@/lib/utils";
 import { Movie, MovieList } from "@/types/movieTypes";
 import React from "react";
 
@@ -26,10 +27,4 @@ export default async function MoviesPage() {
       </div>
     </>
   );
-}
-
-function convertToHoursAndMinutes(minutes: number) {
-  const hours = Math.floor(minutes / 60);
-  const mins = minutes % 60;
-  return `${hours}hr ${mins}minutes`;
 }
