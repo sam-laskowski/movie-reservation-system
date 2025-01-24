@@ -31,6 +31,8 @@ public class Movie {
     @Column(columnDefinition = "TEXT", nullable=false)
     private String posterImage;
 
+    private String backdropImage;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable=false)
     private Genre genre;
@@ -49,10 +51,11 @@ public class Movie {
         U, PG, R12, R15, R18
     }
 
-    public Movie(String title, String description, String posterImage, Genre genre, long duration, AgeRating ageRating) {
+    public Movie(String title, String description, String posterImage, String backdropImage, Genre genre, long duration, AgeRating ageRating) {
         this.title = title;
         this.description = description;
         this.posterImage = posterImage;
+        this.backdropImage = backdropImage;
         this.genre = genre;
         this.duration = duration;
         this.ageRating = ageRating;
