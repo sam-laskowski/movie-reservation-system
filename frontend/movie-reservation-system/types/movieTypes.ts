@@ -11,6 +11,7 @@ export interface MovieCardProps {
 export interface Movie {
   id: number;
   posterImage: string;
+  backdropImage: string;
   title: string;
   description: string;
   genre: string;
