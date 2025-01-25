@@ -18,31 +18,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CinemaList } from "@/types/cinemaTypes";
-
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-];
 
 export default function CinemaSelect({
   allCinemas,
@@ -66,7 +43,7 @@ export default function CinemaSelect({
         >
           {value
             ? allCinemas.find((cinema) => cinema.locationName === value)
-                ?.locationName
+                ?.address
             : "Choose your Cinema"}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -79,8 +56,8 @@ export default function CinemaSelect({
             <CommandGroup>
               {allCinemas.map((cinema) => (
                 <CommandItem
-                  key={cinema.address}
-                  value={cinema.address}
+                  key={cinema.locationName}
+                  value={cinema.locationName}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
@@ -89,7 +66,9 @@ export default function CinemaSelect({
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === cinema.address ? "opacity-100" : "opacity-0"
+                      value === cinema.locationName
+                        ? "opacity-100"
+                        : "opacity-0"
                     )}
                   />
                   {cinema.address}
