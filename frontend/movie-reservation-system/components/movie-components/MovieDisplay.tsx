@@ -29,8 +29,8 @@ export default async function MovieDisplay({ movieId }: { movieId: number }) {
           height={2160}
           className="opacity-15 object-cover min-h-96 -z-10"
         />
-        <div className="absolute top-0 left-0 right-0 h-10 bg-gradient-to-b from-[var(--background)] to-transparent"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-[var(--background)] to-transparent"></div>
+        <div className="absolute top-0 left-0 right-0 h-10 sm:h-20 bg-gradient-to-b from-background to-transparent z-0"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-10 sm:h-44 bg-gradient-to-t from-background to-transparent z-0"></div>
       </div>
       <div className="max-w-screen-lg pt-14">
         <div className="flex flex-row w-full">
