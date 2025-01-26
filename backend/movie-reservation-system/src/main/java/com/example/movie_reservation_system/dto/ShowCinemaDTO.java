@@ -9,6 +9,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class ShowCinemaDTO {
     private Long id;
+    private Long movieId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Long cinemaRoomId;

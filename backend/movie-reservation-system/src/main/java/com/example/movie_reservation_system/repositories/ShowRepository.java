@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.movie_reservation_system.dto.ShowByCinemaAndMovieDTO;
 import com.example.movie_reservation_system.dto.ShowCinemaDTO;
 import com.example.movie_reservation_system.entities.Show;
 
@@ -21,11 +20,11 @@ public interface ShowRepository extends JpaRepository<Show, Long> {
     //Long findCinemaRoomIdByShow(Show show);
 
     //display all shows at a cinema location
-    @Query("SELECT NEW com.example.movie_reservation_system.dto.ShowCinemaDTO(s.id, s.startTime, s.endTime, s.cinemaRoom.id, MIN(seat.price)) " +
+    @Query("SELECT NEW com.example.movie_reservation_system.dto.ShowCinemaDTO(s.id, s.movie.id, s.startTime, s.endTime, s.cinemaRoom.id, MIN(seat.price)) " +
        "FROM Show s " +
        "LEFT JOIN s.seats seat " +
        "WHERE s.cinemaRoom.cinema.id = :cinemaId " +
-       "GROUP BY s.id, s.startTime, s.endTime, s.cinemaRoom.id")
+       "GROUP BY s.id, s.movie.id, s.startTime, s.endTime, s.cinemaRoom.id")
     List<ShowCinemaDTO> findAllByCinemaId(@Param("cinemaId") Long cinemaId);
 
 
