@@ -1,6 +1,6 @@
 "use client";
 
-import "react";
+import React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -20,14 +20,26 @@ import {
 } from "@/components/ui/popover";
 import { useState } from "react";
 import { CinemaList } from "@/types/cinemaTypes";
+import { useRouter } from "next/navigation";
 
 export default function CinemaSelect({
   allCinemas,
+  movieId,
+  cinemaId,
 }: {
   allCinemas: CinemaList;
+  movieId: number;
+  cinemaId: number;
 }) {
+  let cinemaLocation = allCinemas.filter((cinema) => cinema.id == cinemaId)[0]
+    ?.locationName;
+  if (cinemaLocation == undefined) {
+    cinemaLocation = "";
+  }
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(cinemaLocation);
+  const router = useRouter();
+  //console.log(cinemaLocation);
 
   return (
     <Popover
@@ -61,6 +73,7 @@ export default function CinemaSelect({
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
+                    router.push(`/movies/${movieId}/${cinema.id}`);
                   }}
                 >
                   <Check
