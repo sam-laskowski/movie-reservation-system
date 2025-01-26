@@ -17,9 +17,11 @@ export default function Page({
         movieId={id}
         cinemaId={cinemaId}
       />
-      <p>cinema {cinemaId}</p>
       {/* components that display show times for the specific movie and cinema beneath */}
-      <ShowDisplay cinemaId={cinemaId} />
+      <ShowDisplay
+        cinemaId={cinemaId}
+        movieId={id}
+      />
     </div>
   );
 }
