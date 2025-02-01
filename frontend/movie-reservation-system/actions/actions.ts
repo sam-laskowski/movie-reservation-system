@@ -95,3 +95,29 @@ export async function logout() {
   }
   if (logoutSuccessful) redirect("/");
 }
+
+export async function addMovie(prevState: any, formData: FormData) {
+  try {
+    // Send POST request to the backend
+    const jwtToken = (await cookies()).get("session")?.value;
+    //console.log("addmovie cookie", cookie);
+    const response = await fetch("http://localhost:8080/movies/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Include authorization token if required
+        Authorization: `Bearer ${jwtToken}`,
+      },
+      body: JSON.stringify(Object.fromEntries(formData)),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to add movie");
+    }
+    // Parse the response
+    const result = await response.json();
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
