@@ -5,7 +5,7 @@ import Link from "next/link";
 export default async function Navbar() {
   const session = await verifySession();
   const user = session?.userId;
-
+  const sessionRole = session?.role;
   // no user logged in
   if (!user) {
     return (
@@ -27,6 +27,9 @@ export default async function Navbar() {
   return (
     <div>
       <div className="flex flex-row justify-center items-center gap-3">
+        {sessionRole == "ADMIN" && (
+          <Link href={"/dashboard"}>ADMIN Dashboard</Link>
+        )}
         <Link href={"/"}>
           <h1 className="text-4xl p-3">Cinema Deluxe</h1>
         </Link>

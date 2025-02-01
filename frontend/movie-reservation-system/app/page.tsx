@@ -4,7 +4,8 @@ import UserBookings from "@/components/UserBookings";
 export default function Home() {
   return (
     <div>
-      <UserBookings />
+      {/* <UserBookings /> */}
+      <div>Main Screen</div>
     </div>
   );
 }
