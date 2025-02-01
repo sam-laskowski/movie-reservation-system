@@ -1,3 +1,4 @@
+import { convertToHoursAndMinutes } from "@/lib/myUtils";
 import { Movie } from "@/types/movieTypes";
 import Image from "next/image";
 import Link from "next/link";
@@ -53,7 +54,9 @@ export default async function MovieDisplay({ movieId }: { movieId: number }) {
             <dt className="font-bold">Genre</dt>
             <dt className="text-gray-400 capitalize">{genre}</dt>
             <dt className="font-bold">Run Time</dt>
-            <dt className="text-gray-400">{duration}</dt>
+            <dt className="text-gray-400">
+              {convertToHoursAndMinutes(duration)}
+            </dt>
           </div>
         </div>
       </div>

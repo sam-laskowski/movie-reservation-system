@@ -1,4 +1,4 @@
-import { Movie, MovieCardProps } from "@/types/movieTypes";
+import { MovieCardProps } from "@/types/movieTypes";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
