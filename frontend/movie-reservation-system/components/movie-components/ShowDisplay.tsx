@@ -1,4 +1,5 @@
 import { ShowList } from "@/types/showTypes";
+import Link from "next/link";
 import React from "react";
 
 export default async function ShowDisplay({
@@ -10,7 +11,7 @@ export default async function ShowDisplay({
 }) {
   const data = await fetch(`http://localhost:8080/shows/${cinemaId}/shows`);
   const shows: ShowList = await data.json();
-  console.log(shows);
+  //console.log(shows);
   // convert show times from string into time
   return (
     <div>
@@ -19,19 +20,21 @@ export default async function ShowDisplay({
         .filter((show) => show.movieId == movieId)
         .map((show) => {
           return (
-            <div
+            <Link
               key={show.id}
-              className="bg-black border-2 border-[#767676] rounded-sm p-4 cursor-pointer hover:border-[#fff] transition-colors ease-linear duration-500"
+              href={`/show/${show.id}`}
             >
-              <p>
-                {convertToTime(show.startTime)} -{" "}
-                <span className="text-opacity-80 text-[#767676]">
-                  {convertToTime(show.endTime)}
-                </span>
-              </p>
-              <p className="text-[#767676]">Screen {show.cinemaRoomId}</p>
-              <p>From ${show.minSeatPrice}</p>
-            </div>
+              <div className="bg-black border-2 border-[#767676] rounded-sm p-4 cursor-pointer hover:border-[#fff] transition-colors ease-linear duration-500">
+                <p>
+                  {convertToTime(show.startTime)} -{" "}
+                  <span className="text-opacity-80 text-[#767676]">
+                    {convertToTime(show.endTime)}
+                  </span>
+                </p>
+                <p className="text-[#767676]">Screen {show.cinemaRoomId}</p>
+                <p>From ${show.minSeatPrice}</p>
+              </div>
+            </Link>
           );
         })}
     </div>
