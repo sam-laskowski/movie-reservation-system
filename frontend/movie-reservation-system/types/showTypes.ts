@@ -8,3 +8,12 @@ export interface Show {
 }
 
 export type ShowList = Show[];
+
+export interface Seat {
+  id: number;
+  type: string;
+  status: string;
+  price: number;
+}
+
+export type Seats = Seat[];
