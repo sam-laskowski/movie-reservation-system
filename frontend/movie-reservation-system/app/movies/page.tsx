@@ -4,7 +4,7 @@ import { Movie, MovieList } from "@/types/movieTypes";
 import React from "react";
 
 export default async function MoviesPage() {
-  const data = await fetch("http://localhost:8080/movies/all-movies");
+  const data = await fetch("http://backend:8080/movies/all-movies");
   const movies: MovieList = await data.json();
   //console.log(movies);
   return (

@@ -12,9 +12,7 @@ export default async function UserBookings() {
 
   try {
     const data = await fetch(
-      `http://localhost:8080/bookings/get-user-bookings?userId=${
-        session!.userId
-      }`
+      `http://backend:8080/bookings/get-user-bookings?userId=${session!.userId}`
     );
 
     if (!data.ok) {

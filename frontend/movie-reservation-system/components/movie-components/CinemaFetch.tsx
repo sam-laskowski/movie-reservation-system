@@ -9,7 +9,7 @@ export default async function CinemaFetch({
   movieId: number;
   cinemaId: number;
 }) {
-  const data = await fetch(`http://localhost:8080/cinemas/all-cinemas`);
+  const data = await fetch(`http://backend:8080/cinemas/all-cinemas`);
   const allCinemas: CinemaList = await data.json();
   return (
     <div>

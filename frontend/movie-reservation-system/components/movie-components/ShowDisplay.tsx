@@ -9,7 +9,7 @@ export default async function ShowDisplay({
   cinemaId: number;
   movieId: number;
 }) {
-  const data = await fetch(`http://localhost:8080/shows/${cinemaId}/shows`);
+  const data = await fetch(`http://backend:8080/shows/${cinemaId}/shows`);
   const shows: ShowList = await data.json();
   //console.log(shows);
   // convert show times from string into time

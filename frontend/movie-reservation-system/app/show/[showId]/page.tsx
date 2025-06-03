@@ -1,12 +1,15 @@
 import { Seats } from "@/types/showTypes";
 import React from "react";
-import { Armchair } from "lucide-react";
 import { SheetDemo } from "./testywesty";
 
-export default async function Page({ params }: { params: { showId: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ showId: string }>;
+}) {
   const { showId } = await params;
   const data = await fetch(
-    `http://localhost:8080/bookings/find-seats?showId=${showId}`
+    `http://backend:8080/bookings/find-seats?showId=${showId}`
   );
   const seats: Seats = await data.json();
   //console.log(seats);
@@ -19,7 +22,10 @@ export default async function Page({ params }: { params: { showId: string } }) {
               key={seat.id}
               className="w-[50px] h-[36px]"
             >
-              <SheetDemo />
+              <SheetDemo
+                seatId={seat.id}
+                showId={showId}
+              />
             </div>
           ))}
         </div>

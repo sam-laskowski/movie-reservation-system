@@ -6,7 +6,7 @@ import React from "react";
 
 export default async function MovieDisplay({ movieId }: { movieId: number }) {
   const data = await fetch(
-    `http://localhost:8080/movies/get-movie/${movieId}`
+    `http://backend:8080/movies/get-movie/${movieId}`
     //http://localhost:8080/movies/get-movie/2
   );
   const movie: Movie = await data.json();

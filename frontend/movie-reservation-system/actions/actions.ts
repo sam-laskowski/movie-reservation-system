@@ -21,7 +21,7 @@ export async function register(state: FormState, formData: FormData) {
 
   let loginSuccessful = false;
   try {
-    const response = await fetch("http://localhost:8080/auth/register", {
+    const response = await fetch("http://backend:8080/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(Object.fromEntries(formData)),
@@ -52,7 +52,7 @@ export async function register(state: FormState, formData: FormData) {
 export async function login(prevState: any, formData: FormData) {
   let loginSuccessful = false;
   try {
-    const response = await fetch("http://localhost:8080/auth/login", {
+    const response = await fetch("http://backend:8080/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(Object.fromEntries(formData)),
@@ -77,7 +77,7 @@ export async function login(prevState: any, formData: FormData) {
   } catch (error: any) {
     console.error(error);
   }
-  if (loginSuccessful) redirect("/");
+  if (loginSuccessful) redirect("/"); // TODO: redirect to page they were just on
 }
 
 export async function logout() {
@@ -93,7 +93,6 @@ export async function logout() {
   } catch (e: any) {
     console.error("Failed to logout", e);
   }
-  if (logoutSuccessful) redirect("/");
 }
 
 export async function addMovie(prevState: any, formData: FormData) {
@@ -101,7 +100,7 @@ export async function addMovie(prevState: any, formData: FormData) {
     // Send POST request to the backend
     const jwtToken = (await cookies()).get("session")?.value;
     //console.log("addmovie cookie", cookie);
-    const response = await fetch("http://localhost:8080/movies/add", {
+    const response = await fetch("http://backend:8080/movies/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
