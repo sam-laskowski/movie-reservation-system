@@ -8,3 +8,15 @@ export interface Booking {
 }
 
 export type UserBookings = Booking[];
+
+export type User = {
+  id: string;
+  role: string;
+} | null;
+
+export type AuthContextType = {
+  user: User;
+  login: (userData: User) => void;
+  logout: () => void;
+  isAuthenticated: boolean;
+};
