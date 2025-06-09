@@ -2,6 +2,7 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { FormState, RegisterFormSchema } from "@/lib/definitions";
+import { movieSchema } from "@/lib/movieSchema";
 
 export async function register(state: FormState, formData: FormData) {
   console.log(formData);
@@ -58,6 +59,7 @@ export async function login(prevState: any, formData: FormData) {
       body: JSON.stringify(Object.fromEntries(formData)),
     });
     if (!response.ok) {
+      console.log(response);
       const errorData = await response.json();
       throw new Error(errorData.message || "Failed to login: CUSTOM");
     }
@@ -95,28 +97,30 @@ export async function logout() {
   }
 }
 
-export async function addMovie(prevState: any, formData: FormData) {
+export async function addMovie(_prevState: any, formData: FormData) {
+  const raw = Object.fromEntries(formData.entries());
+  const parsed = movieSchema.safeParse(raw);
+
+  if (!parsed.success) {
+    return {
+      errors: parsed.error.flatten().fieldErrors,
+    };
+  }
+
   try {
-    // Send POST request to the backend
     const jwtToken = (await cookies()).get("session")?.value;
-    //console.log("addmovie cookie", cookie);
     const response = await fetch("http://backend:8080/movies/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Include authorization token if required
         Authorization: `Bearer ${jwtToken}`,
       },
-      body: JSON.stringify(Object.fromEntries(formData)),
+      body: JSON.stringify(parsed.data),
     });
 
-    if (!response.ok) {
-      throw new Error("Failed to add movie");
-    }
-    // Parse the response
-    const result = await response.json();
-    console.log(result);
+    if (!response.ok) throw new Error("Failed to add movie");
+    return null;
   } catch (error) {
-    console.error(error);
+    return { general: "Server error: Could not add movie" };
   }
 }

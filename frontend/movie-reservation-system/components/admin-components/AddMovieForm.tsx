@@ -21,36 +21,43 @@ export default function AddMovieForm() {
             id="title"
             label="Title"
             type="string"
+            error={state?.errors?.title}
           />
           <FormField
             id="description"
             label="Description"
             type="string"
+            error={state?.errors?.description}
           />
           <FormField
             id="posterImage"
             label="Poster Image URL"
             type="string"
+            error={state?.errors?.posterImage}
           />
           <FormField
             id="backdropImage"
             label="Backdrop Image URL"
             type="string"
+            error={state?.errors?.backdropImage}
           />
           <FormField
             id="genre"
             label="Genre"
             type="string"
+            error={state?.errors?.genre}
           />
           <FormField
             id="duration"
             label="Duration"
             type="number"
+            error={state?.errors?.duration}
           />
           <FormField
             id="ageRating"
             label="Age Rating"
             type="string"
+            error={state?.errors?.ageRating}
           />
 
           <button type="submit">Add Movie</button>
@@ -77,7 +84,7 @@ function FormField({ id, label, type, error }: FormFieldProps) {
         className="w-full text-black p-2 ring-2 ring-orange-400"
       />
       {error && (
-        <p className="absolute bottom-0 left-0 text-red-500 text-s mt-1">
+        <p className="absolute bottom-0 left-0 text-red-500 text-s mt-1 max-w-full">
           {error}
         </p>
       )}
