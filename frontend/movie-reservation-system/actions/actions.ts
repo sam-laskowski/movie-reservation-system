@@ -98,12 +98,22 @@ export async function logout() {
 }
 
 export async function addMovie(_prevState: any, formData: FormData) {
-  const raw = Object.fromEntries(formData.entries());
+  const raw = {
+    title: formData.get("title") as string,
+    description: formData.get("description") as string,
+    posterImage: formData.get("posterImage") as string,
+    backdropImage: formData.get("backdropImage") as string,
+    genre: formData.get("genre") as string,
+    duration: formData.get("duration") as string,
+    ageRating: formData.get("ageRating") as string,
+  };
   const parsed = movieSchema.safeParse(raw);
 
   if (!parsed.success) {
     return {
       errors: parsed.error.flatten().fieldErrors,
+      data: raw,
+      message: "Failed to add movie.",
     };
   }
 
@@ -121,6 +131,6 @@ export async function addMovie(_prevState: any, formData: FormData) {
     if (!response.ok) throw new Error("Failed to add movie");
     return null;
   } catch (error) {
-    return { general: "Server error: Could not add movie" };
+    return { general: "Server error: Could not add movie", data: raw };
   }
 }
