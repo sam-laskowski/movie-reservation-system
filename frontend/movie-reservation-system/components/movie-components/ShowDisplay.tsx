@@ -15,7 +15,7 @@ export default async function ShowDisplay({
   // convert show times from string into time
   return (
     <div>
-      <h1>Upcoming Shows for today</h1>
+      <h1>All Shows</h1>
       {shows
         .filter((show) => show.movieId == movieId)
         .map((show) => {

@@ -67,7 +67,7 @@ export default function AddShowing() {
           type="submit"
           disabled={pending}
         >
-          {pending ? "Adding..." : "Add Movie"}
+          {pending ? "Adding..." : "Add Showing"}
         </button>
       </form>
     </div>
