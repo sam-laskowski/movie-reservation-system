@@ -2,7 +2,7 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { FormState, RegisterFormSchema } from "@/lib/definitions";
-import { movieSchema } from "@/lib/movieSchema";
+import { movieSchema, showSchema } from "@/lib/movieSchema";
 
 export async function register(state: FormState, formData: FormData) {
   console.log(formData);
@@ -79,7 +79,6 @@ export async function login(prevState: any, formData: FormData) {
   } catch (error: any) {
     console.error(error);
   }
-  if (loginSuccessful) redirect("/"); // TODO: redirect to page they were just on
 }
 
 export async function logout() {
@@ -134,3 +133,68 @@ export async function addMovie(_prevState: any, formData: FormData) {
     return { general: "Server error: Could not add movie", data: raw };
   }
 }
+
+export async function createShowing(_prevState: any, formData: FormData) {
+  const raw = {
+    movieId: formData.get("movieId"),
+    cinemaRoomId: formData.get("cinemaRoomId"),
+    endTime: `${formData.get("endDate") as string}T${
+      formData.get("endTime") as string
+    }`,
+    startTime: `${formData.get("startDate") as string}T${
+      formData.get("startTime") as string
+    }`,
+  };
+  console.log(raw);
+
+  const parsed = showSchema.safeParse(raw);
+
+  if (!parsed.success) {
+    return {
+      errors: parsed.error.flatten().fieldErrors,
+      data: raw,
+      message: "Failed to add movie.",
+    };
+  }
+
+  try {
+    const jwtToken = (await cookies()).get("session")?.value;
+    const response = await fetch("http://backend:8080/shows/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwtToken}`,
+      },
+      body: JSON.stringify(parsed.data),
+    });
+    if (!response.ok) throw new Error("Failed to create show");
+    return null;
+  } catch (error) {
+    return { general: "Server error: Could not create show", data: raw };
+  }
+}
+
+export const bookSeat = async (userId: any, showId: string, seatId: number) => {
+  console.log("pressed");
+  if (!userId) return;
+  const bookingRequestData = {
+    userId: userId,
+    showId: showId,
+    seatId: seatId,
+  };
+  console.log(bookingRequestData);
+  try {
+    const response = await fetch("http://backend:8080/bookings/book-seat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookingRequestData),
+    });
+    console;
+    if (!response.ok) throw new Error("Failed to Book");
+    return null;
+  } catch (e) {
+    console.log("Booking error", e);
+  }
+};
