@@ -27,6 +27,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/movie-reservation
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=nom
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
   db:
     image: postgres:17
@@ -42,3 +43,8 @@ services:
       timeout: 30s
       retries: 5
       start_period: 30s
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
