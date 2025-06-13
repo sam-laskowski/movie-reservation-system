@@ -24,3 +24,10 @@ export const movieSchema = z.object({
   duration: z.coerce.number().positive("Duration must be positive"),
   ageRating: AgeRatingEnum,
 });
+
+export const showSchema = z.object({
+  movieId: z.coerce.number().positive("Movie ID must be positive"),
+  cinemaRoomId: z.coerce.number().positive("Cinema Room ID must be positive"),
+  startTime: z.string(),
+  endTime: z.string(),
+});

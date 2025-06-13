@@ -41,3 +41,10 @@ export enum AgeRating {
   R15 = "R15",
   R18 = "R18",
 }
+
+export interface Showing {
+  movieId: number;
+  cinemaRoomId: number;
+  startTime: string;
+  endTime: string;
+}
