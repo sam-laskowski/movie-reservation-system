@@ -34,6 +34,8 @@ export default async function Navbar() {
           <h1 className="text-4xl p-3">Cinema Deluxe</h1>
         </Link>
         <Link href="/movies">Explore Movies</Link>
+        <Link href={`/profile/${user}`}>Profile</Link>
+
         <button onClick={logout}>Logout</button>
       </div>
     </div>

@@ -29,7 +29,10 @@ export async function verifySession() {
     return null;
   }
 
-  return { userId: session.userId, role: session?.role };
+  return {
+    userId: session.userId,
+    role: session?.role,
+  };
 }
 
 export async function deleteSession() {
