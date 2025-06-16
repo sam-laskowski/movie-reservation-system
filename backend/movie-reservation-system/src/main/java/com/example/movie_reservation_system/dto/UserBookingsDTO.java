@@ -20,4 +20,5 @@ public class UserBookingsDTO {
     private double seatPrice;
     private LocalDateTime showTime;
     private String movieTitle;
+    private String moviePoster;
 }

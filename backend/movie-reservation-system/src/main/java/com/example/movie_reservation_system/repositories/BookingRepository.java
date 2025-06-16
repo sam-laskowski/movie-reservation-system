@@ -28,7 +28,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     List<Booking> findBookingsWithDetailsByUserId(@Param("userId") Long userId);
 
     @Query("SELECT new com.example.movie_reservation_system.dto.UserBookingsDTO("
-     + "b.user.id, b.id, se.type, se.price, s.startTime, m.title) "
+     + "b.user.id, b.id, se.type, se.price, s.startTime, m.title, m.posterImage) "
      + "FROM Booking b "
      + "JOIN b.user u "
      + "JOIN b.show s "
