@@ -13,11 +13,14 @@ export default async function Page({
   );
   const seats: Seats = await data.json();
   //console.log(seats);
+  const sortedSeats = [...seats].sort((a, b) =>
+    a.id.toString().localeCompare(b.id.toString())
+  );
   return (
     <div>
       <div className="flex justify-center">
         <div className="grid grid-flow-col-dense grid-rows-5 w-[600px] gap-1">
-          {seats.map((seat) => {
+          {sortedSeats.map((seat) => {
             return (
               <div
                 key={seat.id}
