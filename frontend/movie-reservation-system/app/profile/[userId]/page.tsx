@@ -9,7 +9,6 @@ export default function page({
   const { userId } = React.use(params);
   return (
     <>
-      <div>profile page of user {userId}</div>
       <Bookings userId={userId} />
     </>
   );

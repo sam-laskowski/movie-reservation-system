@@ -1,6 +1,6 @@
-import { verifySession } from "@/lib/session";
 import { UserBookingList, UserBooking } from "@/types/bookingTypes";
 import React from "react";
+import BookingCard from "./BookingCard";
 
 export default async function Bookings({ userId }: { userId: number }) {
   const userBookingsData = await fetch(
@@ -14,15 +14,17 @@ export default async function Bookings({ userId }: { userId: number }) {
   );
 
   const userBookings: UserBookingList = await userBookingsData.json();
-
+  console.log(userBookings);
   return (
-    <div>
-      {userBookings.map((booking: UserBooking) => (
-        <>
-          <div>{booking.bookingId}</div>
-          <div>{booking.movieTitle}</div>
-        </>
-      ))}
+    <div className="container mx-auto px-2 py-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 justify-items-center">
+        {userBookings.map((booking) => (
+          <BookingCard
+            key={booking.bookingId}
+            {...booking}
+          />
+        ))}
+      </div>
     </div>
   );
 }
