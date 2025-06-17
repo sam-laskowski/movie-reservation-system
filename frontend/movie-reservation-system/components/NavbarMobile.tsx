@@ -103,7 +103,6 @@ export function MobileNavLinks({ user, sessionRole }: MobileNavLinksProps) {
             {sessionRole === "ADMIN" && (
               <Link
                 href={"/dashboard"}
-                onClick={() => setIsOpen(false)} // Close menu on link click
                 className="uppercase text-white hover:text-orange-500 transition-colors duration-200 py-2 w-full text-center text-lg font-medium"
               >
                 ADMIN Dashboard
@@ -111,7 +110,6 @@ export function MobileNavLinks({ user, sessionRole }: MobileNavLinksProps) {
             )}
             <Link
               href="/movies"
-              onClick={() => setIsOpen(false)}
               className="uppercase text-white hover:text-orange-500 transition-colors duration-200 py-2 w-full text-center text-lg font-medium"
             >
               Explore Movies
@@ -120,7 +118,6 @@ export function MobileNavLinks({ user, sessionRole }: MobileNavLinksProps) {
               <>
                 <Link
                   href={`/profile/${user}`}
-                  onClick={() => setIsOpen(false)}
                   className="uppercase text-white hover:text-orange-500 transition-colors duration-200 py-2 w-full text-center text-lg font-medium"
                 >
                   Profile
@@ -141,14 +138,12 @@ export function MobileNavLinks({ user, sessionRole }: MobileNavLinksProps) {
               <>
                 <Link
                   href="/register"
-                  onClick={() => setIsOpen(false)}
                   className="uppercase text-white hover:text-orange-500 transition-colors duration-200 py-2 w-full text-center text-lg font-medium"
                 >
                   Register
                 </Link>
                 <Link
                   href="/login"
-                  onClick={() => setIsOpen(false)}
                   className="uppercase bg-orange-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-orange-700 transition-all duration-200 ease-in-out transform hover:scale-105 active:scale-95 text-lg font-medium"
                 >
                   Login
