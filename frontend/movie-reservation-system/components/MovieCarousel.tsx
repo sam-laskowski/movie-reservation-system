@@ -6,6 +6,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Movie } from "@/types/movieTypes"
 import { fetchMovies } from "@/actions/actions"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function MovieCarousel() {
   const [api, setApi] = useState<any>()
@@ -72,8 +73,10 @@ export default function MovieCarousel() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-end">
-                  <h2 className="text-white text-3xl font-bold drop-shadow-lg">{movies[0].title}</h2>
-                  <Button className="bg-white text-black hover:bg-white/90">Book Seats</Button>
+                  <h2 className="text-white text-3xl font-bold drop-shadow-lg uppercase">{movies[0].title}</h2>
+                  <Link href={`/movies/${movies[0].id}`}>
+                    <Button className="bg-white text-black hover:bg-white/90 uppercase">Book Now</Button>
+                  </Link>
                 </div>
               </>
             )}
@@ -91,8 +94,10 @@ export default function MovieCarousel() {
                   />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-end">
-                  <h2 className="text-white text-3xl font-bold drop-shadow-lg">{movies[1].title}</h2>
-                  <Button className="bg-white text-black hover:bg-white/90">Book Seats</Button>
+                  <h2 className="text-white text-3xl font-bold drop-shadow-lg uppercase">{movies[1].title}</h2>
+                  <Link href={`/movies/${movies[1].id}`}>
+                    <Button className="bg-white text-black hover:bg-white/90 uppercase">Book Now</Button>
+                  </Link>
                 </div>
               </>
             )}
@@ -110,8 +115,10 @@ export default function MovieCarousel() {
                   />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-end">
-                  <h2 className="text-white text-3xl font-bold drop-shadow-lg">{movies[2].title}</h2>
-                  <Button className="bg-white text-black hover:bg-white/90">Book Seats</Button>
+                  <h2 className="text-white text-3xl font-bold drop-shadow-lg uppercase">{movies[2].title}</h2>
+                  <Link href={`/movies/${movies[2].id}`}>
+                    <Button className="bg-white text-black hover:bg-white/90 uppercase">Book Now</Button>
+                  </Link>
                 </div>
               </>
             )}
@@ -129,8 +136,10 @@ export default function MovieCarousel() {
                   />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-end">
-                  <h2 className="text-white text-3xl font-bold drop-shadow-lg">{movies[3].title}</h2>
-                  <Button className="bg-white text-black hover:bg-white/90">Book Seats</Button>
+                  <h2 className="text-white text-3xl font-bold drop-shadow-lg uppercase">{movies[3].title}</h2>
+                  <Link href={`/movies/${movies[3].id}`}>
+                    <Button className="bg-white text-black hover:bg-white/90 uppercase">Book Now</Button>
+                  </Link>
                 </div>
               </>
             )}
@@ -148,8 +157,10 @@ export default function MovieCarousel() {
                   />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-end">
-                  <h2 className="text-white text-3xl font-bold drop-shadow-lg">{movies[4].title}</h2>
-                  <Button className="bg-white text-black hover:bg-white/90">Book Seats</Button>
+                  <h2 className="text-white text-3xl font-bold drop-shadow-lg uppercase">{movies[4].title}</h2>
+                  <Link href={`/movies/${movies[4].id}`}>
+                    <Button className="bg-white text-black hover:bg-white/90 uppercase">Book Now</Button>
+                  </Link>
                 </div>
               </>
             )}
