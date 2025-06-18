@@ -94,6 +94,7 @@ export async function logout() {
   } catch (e: any) {
     console.error("Failed to logout", e);
   }
+  if (logoutSuccessful) redirect("/login");
 }
 
 export async function addMovie(_prevState: any, formData: FormData) {
@@ -198,3 +199,14 @@ export const bookSeat = async (userId: any, showId: string, seatId: number) => {
     console.log("Booking error", e);
   }
 };
+
+
+export const fetchMovies = async () => {
+  try {
+    const response = await fetch("http://backend:8080/movies/all-movies");
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    console.log("Fetching movies error", e);
+  }
+}
