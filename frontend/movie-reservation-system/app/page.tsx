@@ -1,11 +1,12 @@
-import SignupForm from "@/components/SignupForm";
-import UserBookings from "@/components/UserBookings";
+import MovieCarousel from "@/components/MovieCarousel";
 
 export default function Home() {
   return (
     <div>
       {/* <UserBookings /> */}
-      <div>Main Screen</div>
+      <main className="min-h-screen">
+        <MovieCarousel />
+      </main>
     </div>
   );
 }
