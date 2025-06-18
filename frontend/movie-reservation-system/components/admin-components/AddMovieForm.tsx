@@ -3,6 +3,9 @@ import { addMovie } from "@/actions/actions";
 import React, { useActionState, useState } from "react";
 import EnumSelector from "./EnumSelector";
 import { AgeRating, Genre } from "@/types/movieTypes";
+import { Button } from "@/components/ui/button";
+import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 interface FormFieldProps {
   id: string;
@@ -24,10 +27,21 @@ interface FormFieldEnumProps {
 export default function AddMovieForm() {
   const [state, addMovieAction, pending] = useActionState(addMovie, undefined);
 
+  // Handle form submission success
+  React.useEffect(() => {
+    if (state === null) {
+      toast.success("Movie added successfully!", {
+        duration: 3000,
+      });
+    }
+  }, [state]);
+
   return (
-    <div>
-      <div className="p-10 pt-40 text-white flex justify-center items-center">
-        <form action={addMovieAction}>
+    <div className="p-10 pt-40 text-white flex justify-center items-center">
+      <Toaster richColors position="top-center" />
+      <div className="w-full max-w-2xl bg-black border-2 border-[#767676] rounded-lg p-6">
+        <h2 className="text-2xl font-bold text-center mb-6">Add New Movie</h2>
+        <form action={addMovieAction} className="space-y-6">
           <FormField
             id="title"
             label="Title"
@@ -74,7 +88,7 @@ export default function AddMovieForm() {
           />
           <FormField
             id="duration"
-            label="Duration"
+            label="Duration (minutes)"
             type="string"
             error={state?.errors?.duration}
             defaultValue={
@@ -92,12 +106,13 @@ export default function AddMovieForm() {
             }
           />
 
-          <button
+          <Button
             type="submit"
             disabled={pending}
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {pending ? "Adding..." : "Add Movie"}
-          </button>
+          </Button>
         </form>
       </div>
     </div>
@@ -112,29 +127,27 @@ function FormField({
   defaultValue = "",
 }: FormFieldProps) {
   return (
-    <>
-      <div className="relative lg:h-[95px] md:h-[95px] sm:h-[95px] h-[115px]">
-        <label
-          htmlFor={id}
-          className="block text-sm font-medium mb-1"
-        >
-          {label}
-        </label>
-        <input
-          id={id}
-          name={id}
-          type={type}
-          placeholder={label}
-          defaultValue={defaultValue}
-          className="w-full text-black p-2 ring-2 ring-orange-400"
-        />
-        {error && (
-          <p className="absolute bottom-0 left-0 text-red-500 text-s mt-1 max-w-full">
-            {error}
-          </p>
-        )}
-      </div>
-    </>
+    <div className="space-y-2">
+      <label
+        htmlFor={id}
+        className="block text-sm font-medium"
+      >
+        {label}
+      </label>
+      <input
+        id={id}
+        name={id}
+        type={type}
+        placeholder={label}
+        defaultValue={defaultValue}
+        className="w-full bg-black border-2 border-[#767676] rounded-md p-2 text-white focus:border-orange-500 focus:outline-none"
+      />
+      {error && (
+        <p className="text-red-500 text-sm">
+          {error}
+        </p>
+      )}
+    </div>
   );
 }
 
@@ -147,25 +160,23 @@ function FormFieldEnum({
   defaultValue,
 }: FormFieldEnumProps) {
   return (
-    <>
-      <div className="relative lg:h-[95px] md:h-[95px] sm:h-[95px] h-[115px]">
-        <label
-          htmlFor={id}
-          className="block text-sm font-medium mb-1"
-        >
-          {label}
-        </label>
-        <EnumSelector
-          name={id}
-          options={options}
-          defaultValue={defaultValue}
-        />
-        {error && (
-          <p className="absolute bottom-0 left-0 text-red-500 text-s mt-1 max-w-full">
-            {error}
-          </p>
-        )}
-      </div>
-    </>
+    <div className="space-y-2">
+      <label
+        htmlFor={id}
+        className="block text-sm font-medium"
+      >
+        {label}
+      </label>
+      <EnumSelector
+        name={id}
+        options={options}
+        defaultValue={defaultValue}
+      />
+      {error && (
+        <p className="text-red-500 text-sm">
+          {error}
+        </p>
+      )}
+    </div>
   );
 }
