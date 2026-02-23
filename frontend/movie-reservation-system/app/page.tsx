@@ -5,7 +5,8 @@ export default function Home() {
     <div>
       {/* <UserBookings /> */}
       <main className="min-h-screen">
-        <MovieCarousel />
+        {/* <MovieCarousel /> */}
+        Movies
       </main>
     </div>
   );

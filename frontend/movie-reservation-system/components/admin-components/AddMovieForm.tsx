@@ -4,8 +4,6 @@ import React, { useActionState, useState } from "react";
 import EnumSelector from "./EnumSelector";
 import { AgeRating, Genre } from "@/types/movieTypes";
 import { Button } from "@/components/ui/button";
-import { Toaster } from "@/components/ui/sonner";
-import { toast } from "sonner";
 
 interface FormFieldProps {
   id: string;
@@ -27,18 +25,18 @@ interface FormFieldEnumProps {
 export default function AddMovieForm() {
   const [state, addMovieAction, pending] = useActionState(addMovie, undefined);
 
-  // Handle form submission success
-  React.useEffect(() => {
-    if (state === null) {
-      toast.success("Movie added successfully!", {
-        duration: 3000,
-      });
-    }
-  }, [state]);
+  // // Handle form submission success
+  // React.useEffect(() => {
+  //   if (state === null) {
+  //     toast.success("Movie added successfully!", {
+  //       duration: 3000,
+  //     });
+  //   }
+  // }, [state]);
 
   return (
     <div className="p-10 pt-40 text-white flex justify-center items-center">
-      <Toaster richColors position="top-center" />
+      {/* <Toaster richColors position="top-center" /> */}
       <div className="w-full max-w-2xl bg-black border-2 border-[#767676] rounded-lg p-6">
         <h2 className="text-2xl font-bold text-center mb-6">Add New Movie</h2>
         <form action={addMovieAction} className="space-y-6">

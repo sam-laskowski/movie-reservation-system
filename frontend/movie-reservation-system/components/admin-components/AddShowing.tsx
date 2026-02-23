@@ -4,8 +4,6 @@ import React, { useActionState, useEffect, useState } from "react";
 import { Movie, MovieList } from "@/types/movieTypes";
 import { CinemaList } from "@/types/cinemaTypes";
 import { Button } from "@/components/ui/button";
-import { Toaster } from "@/components/ui/sonner";
-import { toast } from "sonner"
 
 export default function AddShowing() {
   const [state, createShowAction, pending] = useActionState(
@@ -19,19 +17,19 @@ export default function AddShowing() {
   const [startDateTime, setStartDateTime] = useState<{ date: string; time: string }>({ date: "", time: "" });
   const [endDateTime, setEndDateTime] = useState<{ date: string; time: string }>({ date: "", time: "" });
 
-  // Handle form submission success
-  useEffect(() => {
-    if (state === null) {
-      toast.success("Showing added successfully!", {
-        description: `${selectedMovie?.title} at ${startDateTime.time}`,
-        duration: 3000,
-      });
-      // Reset form
-      setSelectedMovie(null);
-      setStartDateTime({ date: "", time: "" });
-      setEndDateTime({ date: "", time: "" });
-    }
-  }, [state]);
+  // // Handle form submission success
+  // useEffect(() => {
+  //   if (state === null) {
+  //     toast.success("Showing added successfully!", {
+  //       description: `${selectedMovie?.title} at ${startDateTime.time}`,
+  //       duration: 3000,
+  //     });
+  //     // Reset form
+  //     setSelectedMovie(null);
+  //     setStartDateTime({ date: "", time: "" });
+  //     setEndDateTime({ date: "", time: "" });
+  //   }
+  // }, [state]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,7 +93,7 @@ export default function AddShowing() {
 
   return (
     <div className="p-10 pt-40 text-white flex justify-center items-center">
-      <Toaster richColors position="top-center" />
+      {/* <Toaster richColors position="top-center" /> */}
       <div className="w-full max-w-2xl bg-black border-2 border-[#767676] rounded-lg p-6">
         <h2 className="text-2xl font-bold text-center mb-6">Add New Showing</h2>
         {error && (

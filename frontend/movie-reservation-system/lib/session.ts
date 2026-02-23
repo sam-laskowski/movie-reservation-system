@@ -1,8 +1,7 @@
 "use server";
 
 import "server-only";
-import { jwtVerify } from "jose";
-import { redirect } from "next/navigation";
+import { jwtVerify, errors } from "jose";
 import { cookies } from "next/headers";
 
 const secretKey = process.env.JWT_SECRET_KEY;
@@ -16,8 +15,12 @@ export async function decrypt(session: string | undefined = "") {
       algorithms: ["HS256"],
     });
     return payload;
-  } catch (e: any) {
-    console.log(e);
+  } catch (e: unknown) {
+    if (e instanceof errors.JOSEError) {
+      console.log("jose error", e.code, e.message, e.cause);
+    } else {
+      console.log("unknown error", e)
+    }
     return null;
   }
 }
