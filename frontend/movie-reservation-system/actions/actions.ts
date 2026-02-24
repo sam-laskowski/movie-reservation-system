@@ -22,7 +22,7 @@ export async function register(state: FormState, formData: FormData) {
 
   let loginSuccessful = false;
   try {
-    const response = await fetch("http://backend:8080/auth/register", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(Object.fromEntries(formData)),
@@ -53,7 +53,7 @@ export async function register(state: FormState, formData: FormData) {
 export async function login(prevState: any, formData: FormData) {
   let loginSuccessful = false;
   try {
-    const response = await fetch("http://backend:8080/auth/login", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(Object.fromEntries(formData)),
@@ -119,7 +119,7 @@ export async function addMovie(_prevState: any, formData: FormData) {
 
   try {
     const jwtToken = (await cookies()).get("session")?.value;
-    const response = await fetch("http://backend:8080/movies/add", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/movies/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -160,7 +160,7 @@ export async function createShowing(_prevState: any, formData: FormData) {
 
   try {
     const jwtToken = (await cookies()).get("session")?.value;
-    const response = await fetch("http://backend:8080/shows/create", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/shows/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -185,7 +185,7 @@ export const bookSeat = async (userId: any, showId: string, seatId: number) => {
   };
   console.log(bookingRequestData);
   try {
-    const response = await fetch("http://backend:8080/bookings/book-seat", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/bookings/book-seat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -203,7 +203,7 @@ export const bookSeat = async (userId: any, showId: string, seatId: number) => {
 
 export const fetchMovies = async () => {
   try {
-    const response = await fetch("http://backend:8080/movies/all-movies");
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/movies/all-movies`);
     const data = await response.json();
     return data;
   } catch (e) {

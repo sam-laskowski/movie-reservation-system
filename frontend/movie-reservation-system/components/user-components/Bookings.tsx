@@ -4,7 +4,7 @@ import BookingCard from "./BookingCard";
 
 export default async function Bookings({ userId }: { userId: number }) {
   const userBookingsData = await fetch(
-    `http://backend:8080/bookings/get-user-bookings?userId=${userId}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/bookings/get-user-bookings?userId=${userId}`,
     {
       method: "GET",
       headers: {

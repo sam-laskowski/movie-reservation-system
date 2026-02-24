@@ -10,7 +10,7 @@ export default async function ShowDisplay({
   cinemaId: number;
   movieId: number;
 }) {
-  const data = await fetch(`http://backend:8080/shows/${cinemaId}/shows`);
+  const data = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/shows/${cinemaId}/shows`);
   const shows: ShowList = await data.json();
 
   // Group shows by date

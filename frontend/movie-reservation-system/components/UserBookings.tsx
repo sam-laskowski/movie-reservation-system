@@ -12,7 +12,7 @@ export default async function UserBookings() {
 
   try {
     const data = await fetch(
-      `http://backend:8080/bookings/get-user-bookings?userId=${session!.userId}`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/bookings/get-user-bookings?userId=${session!.userId}`
     );
 
     if (!data.ok) {

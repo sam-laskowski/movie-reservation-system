@@ -9,7 +9,7 @@ export default async function Page({
 }) {
   const { showId } = await params;
   const data = await fetch(
-    `http://backend:8080/bookings/find-seats?showId=${showId}`
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/bookings/find-seats?showId=${showId}`
   );
   const seats: Seats = await data.json();
   //console.log(seats);
