@@ -29,12 +29,26 @@ jobs:
 
             - name: Build and push backend
               run: |
-                docker build -t $ACR_LOGIN_SERVER/backend:latest ./backend/movie-reservation-system
-                docker push $ACR_LOGIN_SERVER/backend:latest
+                docker build -t $ACR_LOGIN_SERVER/backend:${{ github.sha }} ./backend/movie-reservation-system
+                docker push $ACR_LOGIN_SERVER/backend:${{ github.sha }}
 
             - name: Build and push frontend
               run: |
-                docker build -t $ACR_LOGIN_SERVER/frontend:latest ./frontend/movie-reservation-system
-                docker push $ACR_LOGIN_SERVER/frontend:latest
+                docker build -t $ACR_LOGIN_SERVER/frontend:${{ github.sha }} ./frontend/movie-reservation-system
+                docker push $ACR_LOGIN_SERVER/frontend:${{ github.sha }}
+            
+            - name: Deploy Backend
+              uses: azure/container-apps-deploy-action@v1
+              with:
+                containerAppName: movie-backend-api
+                resourceGroup: rg-movie-reservation
+                imageToDeploy: $ACR_LOGIN_SERVER/backend:${{ github.sha }}
+
+            - name: Deploy Frontend
+              uses: azure/container-apps-deploy-action@v1
+              with:
+                containerAppName: frontend
+                resourceGroup: rg-movie-reservation
+                imageToDeploy: $ACR_LOGIN_SERVER/frontend:${{ github.sha }}
 
             
