@@ -13,6 +13,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Armchair } from "lucide-react";
+import { useState } from "react";
 
 export default function SheetDemo({
   seatId,
@@ -25,8 +26,10 @@ export default function SheetDemo({
   userId?: any;
   isBooked: boolean;
 }) {
+  const [open, setOpen] = useState(false);
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button
           variant="outline"
@@ -43,7 +46,10 @@ export default function SheetDemo({
         <div>{userId ? <div>Logged in</div> : <Login />}</div>
         <SheetFooter>
           <Button
-            onClick={() => bookSeat(userId, showId, seatId)}
+            onClick={() => {
+              bookSeat(userId, showId, seatId)
+              setOpen(false)
+            }}
             disabled={!userId}
           >
             Book
