@@ -15,7 +15,7 @@ export default async function middleware(req: NextRequest) {
   const cookie = (await cookies()).get("session")?.value;
   //console.log("cookie: ", cookie);
   const session = await decrypt(cookie);
-  console.log("session role: ", session?.role);
+  console.log("session role, user: ", session?.role, session?.user);
 
   //  redirect to / if the user is not admin
   if (isProtectedRoute && session?.role !== "ADMIN") {
