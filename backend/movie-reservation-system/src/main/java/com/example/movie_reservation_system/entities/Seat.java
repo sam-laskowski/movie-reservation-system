@@ -38,12 +38,16 @@ public class Seat {
     @JsonBackReference
     private Show show;
 
+    // reference a reservation id
+    private long heldBy;
+    
     public enum SeatType {
         standard,
         premium
     }
     public enum SeatStatus {
         available,
+        held,
         booked
     }
 }
