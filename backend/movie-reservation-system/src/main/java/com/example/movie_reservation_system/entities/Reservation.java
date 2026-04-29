@@ -1,6 +1,7 @@
 package com.example.movie_reservation_system.entities;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -16,11 +17,11 @@ public class Reservation {
 
 
     @JoinColumn(name="seat_id")
-    private Seat seat;
+    private List<Seat> seats;
 
     private String userSession;
 
-    private LocalDateTime expiresAt;
+    private LocalTime expiresAt;
 
     private ReservationStatus status;
     
