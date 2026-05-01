@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.movie_reservation_system.dto.ConfirmSeatRequest;
 import com.example.movie_reservation_system.dto.ReserveSeatRequest;
 import com.example.movie_reservation_system.services.ReservationService;
 
@@ -29,4 +30,19 @@ public class ReservationController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
+    // once received paymant confirmation from third party likely webhook, this function called in body
+    @PostMapping("/payment-confirmed")
+    public ResponseEntity<String> confirmSeats(@RequestBody ConfirmSeatRequest request) {
+        
+        // verify payment id and signature
+ 
+        // check reservation hold still valid
+
+        // update seats with confirmation
+        reservationService.confirmSeats(request);
+        return ResponseEntity.ok("Seats booked successfully");
+    }
+
+
 }
