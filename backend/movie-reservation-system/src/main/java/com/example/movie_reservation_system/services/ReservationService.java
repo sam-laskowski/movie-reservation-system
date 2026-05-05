@@ -1,6 +1,6 @@
 package com.example.movie_reservation_system.services;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public class ReservationService {
         Reservation currReservation = new Reservation();
         currReservation.setSeats(foundSeats);
         currReservation.setUserSession(request.getUserId());
-        currReservation.setExpiresAt(LocalTime.now().plusMinutes(5));
+        currReservation.setExpiresAt(LocalDateTime.now().plusMinutes(5));
         currReservation.setStatus(ReservationStatus.pending);
         reservationRepository.save(currReservation);
     }

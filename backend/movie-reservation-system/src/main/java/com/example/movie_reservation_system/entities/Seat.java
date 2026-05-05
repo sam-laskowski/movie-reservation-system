@@ -35,11 +35,14 @@ public class Seat {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "show_id")
-    @JsonBackReference
+    @JsonBackReference("show-seats")
     private Show show;
 
     // reference a reservation id
-    private long heldBy;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reservation_id", nullable = true)
+    @JsonBackReference("reservation-seats")
+    private Reservation reservation;
     
     public enum SeatType {
         standard,
