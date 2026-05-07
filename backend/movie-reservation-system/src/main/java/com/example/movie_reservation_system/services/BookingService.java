@@ -49,10 +49,6 @@ public class BookingService {
         Show show = showRepository.findById(bookingRequest.getShowId()).orElseThrow(() -> new EntityNotFoundException("Show not found"));
         Seat seat = seatRepository.findById(bookingRequest.getSeatId()).orElseThrow(() -> new EntityNotFoundException("Seat not found"));
 
-        if (seat.getStatus() == SeatStatus.booked) {
-            throw new IllegalStateException("Seat already booked");
-        }
-
         LocalDateTime bookingTime = LocalDateTime.now();
         Booking booking = new Booking();
         booking.setBookingTime(bookingTime);
@@ -60,9 +56,6 @@ public class BookingService {
         booking.setUser(user);
         booking.setShow(show);
         bookingRepository.save(booking);
-
-        seat.setStatus(SeatStatus.booked);
-        seatRepository.save(seat);
     }
 
     // public List<UserBookingsDTO> getBookingsByUserId(Long userId) {

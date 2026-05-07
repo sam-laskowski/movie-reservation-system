@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,7 @@ import com.example.movie_reservation_system.entities.Seat;
 import com.example.movie_reservation_system.entities.Show;
 
 import jakarta.persistence.LockModeType;
+import jakarta.persistence.QueryHint;
 
 @Repository
 public interface SeatRepository extends JpaRepository<Seat, Long> {
@@ -27,6 +29,9 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
     Optional<Seat> findByIdForUpdate(@Param("seatId") Long seatId);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("SELECT s FROM Seat s WHERE s.id IN :ids")
+    @QueryHints({
+        @QueryHint(name = "jakarta.persistence.lock.timeout", value = "3000")
+    })
+    @Query("SELECT s FROM Seat s WHERE s.id IN :ids ORDER BY s.id")
     List<Seat> findAllByIdWithLock(@Param("ids") List<Long> ids);
 }

@@ -22,11 +22,14 @@ export async function register(state: FormState, formData: FormData) {
 
   let loginSuccessful = false;
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(formData)),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/register`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      },
+    );
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || "Failed to register: CUSTOM");
@@ -53,11 +56,14 @@ export async function register(state: FormState, formData: FormData) {
 export async function login(prevState: any, formData: FormData) {
   let loginSuccessful = false;
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(formData)),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      },
+    );
     if (!response.ok) {
       console.log(response);
       const errorData = await response.json();
@@ -119,14 +125,17 @@ export async function addMovie(_prevState: any, formData: FormData) {
 
   try {
     const jwtToken = (await cookies()).get("session")?.value;
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/movies/add`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwtToken}`,
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/movies/add`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
+        },
+        body: JSON.stringify(parsed.data),
       },
-      body: JSON.stringify(parsed.data),
-    });
+    );
 
     if (!response.ok) throw new Error("Failed to add movie");
     return null;
@@ -160,14 +169,17 @@ export async function createShowing(_prevState: any, formData: FormData) {
 
   try {
     const jwtToken = (await cookies()).get("session")?.value;
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/shows/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwtToken}`,
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/shows/create`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
+        },
+        body: JSON.stringify(parsed.data),
       },
-      body: JSON.stringify(parsed.data),
-    });
+    );
     if (!response.ok) throw new Error("Failed to create show");
     return null;
   } catch (error) {
@@ -185,13 +197,16 @@ export const bookSeat = async (userId: any, showId: string, seatId: number) => {
   };
   console.log(bookingRequestData);
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/bookings/book-seat`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/bookings/book-seat`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingRequestData),
       },
-      body: JSON.stringify(bookingRequestData),
-    });
+    );
     console;
     if (!response.ok) throw new Error("Failed to Book");
     return null;
@@ -200,13 +215,71 @@ export const bookSeat = async (userId: any, showId: string, seatId: number) => {
   }
 };
 
+type ReservationResponse = {
+  reservationId: number;
+  message: string;
+};
+
+export const reserveSeats = async (
+  seatIds: number[],
+  userId: string,
+): Promise<ReservationResponse> => {
+  const reserveSeatRequest = {
+    seatIds: seatIds,
+    userId: userId,
+  };
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/reservations/reserve-seats`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reserveSeatRequest),
+    },
+  );
+  if (!response.ok) throw new Error("Failed to reserve");
+  return response.json();
+};
+
+type ConfirmPaymentResponse = {
+  message: string;
+};
+
+export const confirmPayment = async (
+  seatIds: number[],
+  userId: string,
+  reservationId: number,
+  showId: string,
+): Promise<ConfirmPaymentResponse> => {
+  const confirmSeatRequest = {
+    seatIds: seatIds,
+    userId: userId,
+    reservationId: reservationId,
+    showId: showId,
+  };
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/reservations/payment-confirmed`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(confirmSeatRequest),
+    },
+  );
+  if (!response.ok) throw new Error("Failed to confirm payment");
+  return response.json();
+};
 
 export const fetchMovies = async () => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/movies/all-movies`);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/movies/all-movies`,
+    );
     const data = await response.json();
     return data;
   } catch (e) {
     console.log("Fetching movies error", e);
   }
-}
+};

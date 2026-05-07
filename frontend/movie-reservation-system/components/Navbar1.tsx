@@ -15,7 +15,7 @@ export default async function Navbar1() {
           className="flex items-center group"
         >
           <h1 className="uppercase text-4xl sm:text-5xl font-extrabold transition-colors duration-300 group-hover:text-orange-400">
-            C
+            Cinema
           </h1>
         </Link>
 

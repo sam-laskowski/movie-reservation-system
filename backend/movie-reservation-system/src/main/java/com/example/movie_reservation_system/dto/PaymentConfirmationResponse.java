@@ -1,7 +1,5 @@
 package com.example.movie_reservation_system.dto;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReserveSeatRequest {
-    List<Long> seatIds;
-    String userId;
+public class PaymentConfirmationResponse {
+    private String message;
 }

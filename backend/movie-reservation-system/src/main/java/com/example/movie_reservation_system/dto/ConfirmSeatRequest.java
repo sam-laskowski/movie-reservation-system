@@ -2,14 +2,12 @@ package com.example.movie_reservation_system.dto;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class ReserveSeatRequest {
+public class ConfirmSeatRequest {
     List<Long> seatIds;
     String userId;
+    Long reservationId;
+    Long showId;
 }
