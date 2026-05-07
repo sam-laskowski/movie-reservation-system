@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.movie_reservation_system.dto.BookingRequest;
 import com.example.movie_reservation_system.dto.ConfirmSeatRequest;
 import com.example.movie_reservation_system.dto.ReserveSeatRequest;
 import com.example.movie_reservation_system.entities.Reservation;
@@ -29,6 +30,9 @@ public class ReservationService {
 
     @Autowired
     private ReservationRepository reservationRepository;
+
+    @Autowired
+    private BookingService bookingService;
 
 
     public Long reserveSeats(ReserveSeatRequest request) {
@@ -71,6 +75,11 @@ public class ReservationService {
         
         reservation.setStatus(ReservationStatus.confirmed);
         reservationRepository.save(reservation);
+
+        for (Seat seat : foundSeats) {
+            BookingRequest bookingRequest = new BookingRequest(Long.parseLong(request.getUserId()), request.getShowId(), seat.getId());
+            bookingService.bookSeat(bookingRequest);
+        }
     }
 
     public List<Seat> findAndValidateSeats(List<Long> seatIds) {

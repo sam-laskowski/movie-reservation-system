@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.movie_reservation_system.dto.ConfirmSeatRequest;
+import com.example.movie_reservation_system.dto.PaymentConfirmationResponse;
 import com.example.movie_reservation_system.dto.ReservationResponse;
 import com.example.movie_reservation_system.dto.ReserveSeatRequest;
 import com.example.movie_reservation_system.services.ReservationService;
@@ -40,7 +41,7 @@ public class ReservationController {
 
     // once received paymant confirmation from third party likely webhook, this function called in body
     @PostMapping("/payment-confirmed")
-    public ResponseEntity<String> confirmSeats(@RequestBody ConfirmSeatRequest request) {
+    public ResponseEntity<PaymentConfirmationResponse> confirmSeats(@RequestBody ConfirmSeatRequest request) {
         
         // verify payment id and signature
  
@@ -48,7 +49,7 @@ public class ReservationController {
 
         // update seats with confirmation
         reservationService.confirmSeats(request);
-        return ResponseEntity.ok("Seats booked successfully");
+        return ResponseEntity.ok(new PaymentConfirmationResponse("Seats booked successfully"));
     }
 
 

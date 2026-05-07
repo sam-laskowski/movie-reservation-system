@@ -9,4 +9,5 @@ public class ConfirmSeatRequest {
     List<Long> seatIds;
     String userId;
     Long reservationId;
+    Long showId;
 }

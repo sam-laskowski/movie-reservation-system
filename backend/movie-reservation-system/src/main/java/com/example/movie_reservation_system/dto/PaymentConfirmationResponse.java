@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookingRequest {
-
-    private Long userId;
-    private Long showId;
-    private Long seatId;
+public class PaymentConfirmationResponse {
+    private String message;
 }
