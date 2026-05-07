@@ -31,7 +31,7 @@ public class ReservationService {
     private ReservationRepository reservationRepository;
 
 
-    public void reserveSeats(ReserveSeatRequest request) {
+    public Long reserveSeats(ReserveSeatRequest request) {
         // fetch requested seats
 
         List<Seat> foundSeats = findAndValidateSeats(request.getSeatIds());
@@ -54,6 +54,7 @@ public class ReservationService {
         currReservation.setExpiresAt(LocalDateTime.now().plusMinutes(5));
         currReservation.setStatus(ReservationStatus.pending);
         reservationRepository.save(currReservation);
+        return currReservation.getId();
     }
 
     public void confirmSeats(ConfirmSeatRequest request) {
